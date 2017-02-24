@@ -2,7 +2,6 @@
 
 import os
 import shutil
-import argparse
 
 from os import path, mkdir
 from functools import reduce
@@ -54,7 +53,7 @@ class Builder:
 
     def build(self):
         mkdir(self.dest)
-        for root, dirs, files in os.walk(template_path):
+        for root, dirs, files in os.walk(self.source):
             dest = self.get_dest(self.get_relative_path(root))
             [self.copy_file(
                 path.join(root, file_name),
