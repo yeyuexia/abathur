@@ -26,7 +26,7 @@ class Builder:
         return "{" + key.strip() + "}", value.strip()
 
     def copy_file(self, source, dest):
-        print("copy " + source + " to " + dest)
+        print(f"copy: from {source} to {dest}")
         shutil.copyfile(source, dest)
         try:
             with open(source, "r") as f:
@@ -42,7 +42,7 @@ class Builder:
         )
 
     def make_dir(self, dest, folder_name):
-        print("create dir " + self.replace(path.join(dest, folder_name)))
+        print(f"create dir {self.replace(path.join(dest, folder_name))}")
         mkdir(self.replace(path.join(dest, folder_name)))
 
     def get_relative_path(self, src):
