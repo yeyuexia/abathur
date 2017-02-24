@@ -8,27 +8,17 @@ from os import path, mkdir
 from functools import reduce
 
 
-DEFAULT_TEMPLATE_PATH = "template"
-
-
 class Builder:
 
-    def __init__(self, project, source, dest, placeholders, configuration):
+    def __init__(self, project, source, dest, placeholders):
         self.project = project
         self.source = source
         self.dest = dest
-        self.placeholders = self._init_placeholders(
-            placeholders, configuration
-        )
+        self.placeholders = self._init_placeholders(placeholders)
 
-    def _init_placeholders(self, src, configuration):
+    def _init_placeholders(self, src):
         placeholders = dict()
         placeholders["{PROJECT_NAME}"] = self.project
-        if configuration:
-            with open(configuration, "r") as f:
-                placeholders.update(
-                    [self.parse_placeholder(row) for row in f.readlines()]
-                )
         placeholders.update([self.parse_placeholder(val) for val in src])
         return placeholders
 
@@ -71,29 +61,3 @@ class Builder:
                 self.replace(path.join(dest, file_name))
             ) for file_name in files]
             [self.make_dir(dest, folder) for folder in dirs]
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="build project based on template"
-    )
-    parser.add_argument("project_name", metavar="project_name")
-    parser.add_argument("-t", "--template", metavar="template path")
-    parser.add_argument("-o", "--output", metavar="output path")
-    parser.add_argument(
-        "-p", "--placeholder",
-        metavar="--placeholder {placeholder}={what_your_want_replace}",
-        default=""
-    )
-    parser.add_argument(
-        "-f", "--file",
-        metavar="--file configuration_file", default=None
-    )
-    args = parser.parse_args()
-
-    template_path = args.template or DEFAULT_TEMPLATE_PATH
-    dest_root = args.output or args.project_name
-    Builder(
-        args.project_name, template_path, dest_root,
-        args.placeholder, args.file
-    ).build()
