@@ -11,9 +11,7 @@ from resources import (
     LOCAL_RESOURCE,
     REMOTE_RESOURCE
 )
-
-
-ALIAS_CONFIGURATION = "~/.abathur/alias.json"
+from .config import ALIAS_CONFIGURATION
 
 
 class NotExistedAlias(Exception):

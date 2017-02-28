@@ -7,16 +7,17 @@ import shutil
 from os import path, mkdir
 from functools import reduce
 
+from .config import IGNORE_FILES
+
 
 class TemplateBuilder:
-    __IGNORE_FILES__ = [r"\.git/.*", r".abathur"]
 
     def __init__(self, project, source, dest, placeholders):
         self.project = project
         self.source = source
         self.dest = dest
         self.placeholders = placeholders
-        self.ignores = [re.compile(ignore_file) for ignore_file in self.__IGNORE_FILES__]
+        self.ignores = [re.compile(ignore_file) for ignore_file in IGNORE_FILES]
 
     def is_ignored(self, path):
         return any(
@@ -24,7 +25,7 @@ class TemplateBuilder:
         )
 
     def copy_file(self, source, dest):
-        if not self.is_ignored(folder_name):
+        if not self.is_ignored(source):
             print(f"copy: from {source} to {dest}")
             shutil.copyfile(source, dest)
             try:
