@@ -11,7 +11,6 @@ from .config import IGNORE_FILES
 
 
 class TemplateBuilder:
-
     def __init__(self, project, source, dest, placeholders):
         self.project = project
         self.source = source
