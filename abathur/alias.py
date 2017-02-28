@@ -16,6 +16,11 @@ from resources import (
 ALIAS_CONFIGURATION = "~/.abathur/alias.json"
 
 
+class NotExistedAlias(Exception):
+    def __init__(self, alias):
+        self.alias = alias
+
+
 class AliasManager:
     def __init__(self):
         self._load_configuration()
@@ -30,6 +35,11 @@ class AliasManager:
     def add(self, name, uri):
         self.alias[name] = self.generate_alias(uri)
         self._storage()
+
+    def get(self, name):
+        if name not in self.alias:
+            raise NotExistedAlias(name)
+        return self.alias[name]
 
     def _storage(self):
         caches = dict(

@@ -1,38 +1,37 @@
 # coding: utf8
 
 import os
+import re
 import shutil
 
 from os import path, mkdir
 from functools import reduce
 
 
-class Builder:
+class TemplateBuilder:
+    __IGNORE_FILES__ = [r"\.git/.*", r".abathur"]
 
     def __init__(self, project, source, dest, placeholders):
         self.project = project
         self.source = source
         self.dest = dest
-        self.placeholders = self._init_placeholders(placeholders)
+        self.placeholders = placeholders
+        self.ignores = [re.compile(ignore_file) for ignore_file in self.__IGNORE_FILES__]
 
-    def _init_placeholders(self, src):
-        placeholders = dict()
-        placeholders["{PROJECT_NAME}"] = self.project
-        placeholders.update([self.parse_placeholder(val) for val in src])
-        return placeholders
-
-    def parse_placeholder(self, src):
-        key, value = src.split("=")
-        return "{" + key.strip() + "}", value.strip()
+    def is_ignored(self, path):
+        return any(
+            [ignore.match(path) for ignore in self.ignores]
+        )
 
     def copy_file(self, source, dest):
-        print(f"copy: from {source} to {dest}")
-        shutil.copyfile(source, dest)
-        try:
-            with open(source, "r") as f:
-                open(dest, "w").write(self.replace(f.read()))
-        except Exception:
-            pass
+        if not self.is_ignored(folder_name):
+            print(f"copy: from {source} to {dest}")
+            shutil.copyfile(source, dest)
+            try:
+                with open(source, "r") as f:
+                    open(dest, "w").write(self.replace(f.read()))
+            except Exception e:
+                print(f"copy file {source} error, {e}")
 
     def replace(self, src):
         return reduce(
@@ -42,8 +41,9 @@ class Builder:
         )
 
     def make_dir(self, dest, folder_name):
-        print(f"create dir {self.replace(path.join(dest, folder_name))}")
-        mkdir(self.replace(path.join(dest, folder_name)))
+        if not self.is_ignored(folder_name):
+            print(f"create dir {self.replace(path.join(dest, folder_name))}")
+            mkdir(self.replace(path.join(dest, folder_name)))
 
     def get_relative_path(self, src):
         return src.replace(self.source, "").lstrip("/")
