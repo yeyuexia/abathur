@@ -28,7 +28,7 @@ class TemplateBuilder:
             try:
                 with open(source, "r") as f:
                     open(dest, "w").write(self.replace(f.read()))
-            except Exception e:
+            except Exception as e:
                 print(f"copy file {source} error, {e}")
 
     def replace(self, src):
