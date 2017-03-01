@@ -25,9 +25,12 @@ class AliasManager:
 
     def _load_configuration(self):
         with require(ALIAS_CONFIGURATION) as f:
-            aliases = json.load(f)
-        self.aliases = dict(
-            [(alias, Alias(**source)) for alias, source in aliases]
+            src = f.read()
+        self.aliases = self.load_alias(json.loads(src) if src else dict())
+
+    def load_alias(self, json_file):
+        return dict(
+            [(alias, Alias(**source)) for alias, source in json_file.items()]
         )
 
     def add(self, name, uri):
