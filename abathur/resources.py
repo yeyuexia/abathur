@@ -6,14 +6,6 @@ import os.path
 from .filelock import FileLock
 
 
-class LockTimeoutException(Exception):
-    def __init__(self, resource, timeout):
-        self.resource = resource
-        self.timeout = timeout
-
-    def __repr__(self):
-        return f"try open lock file {self.resource} timeout. time: {self.timeout}"
-
 class NotSupportException(Exception):
     pass
 
