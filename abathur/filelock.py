@@ -4,6 +4,8 @@ import os
 import errno
 import time
 
+from os import path
+
 
 class FileLock:
     def __init__(self, resource, timeout=1, delay=0.01):
@@ -28,7 +30,7 @@ class FileLock:
                         self.resource, self.timeout
                     )
                 time.sleep(self.delay)
-            self.fd = open(self.resource)
+            self.fd = open(self.resource, "rw")
         return self.fd
 
     def __exit__(self, type, value, traceback):
