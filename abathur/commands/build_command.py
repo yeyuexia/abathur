@@ -1,7 +1,7 @@
 # coding: utf8
 
 from .base_command import Command
-from abathur import build
+from abathur.abathur import build
 
 
 class BuildCommand(Command):
