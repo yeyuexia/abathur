@@ -6,6 +6,7 @@ from .alias import AliasManager
 from .builder import TemplateBuilder
 from .config import ABATHUR_CONFIGURATION, IGNORE_FILES
 
+
 def get_abathur_config(template_path):
     config = os.path.join(template_path, ABATHUR_CONFIGURATION)
     if not (os.path.exists(config) and os.path.isfile(config)):
