@@ -38,4 +38,4 @@ class BuilderTest(TestCase):
     def test_should_replace_all_placeholder(self):
         src = "abc/placeholder1_p2_asd_p4_p3"
         result = self.builder.replace(src)
-        self.assertEqual(result, "abc/aaaaaa_bbbb_asd_p4_ccccccc")g
+        self.assertEqual(result, "abc/aaaaaa_bbbb_asd_p4_ccccccc")
