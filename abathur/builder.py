@@ -7,16 +7,14 @@ import shutil
 from os import path, mkdir
 from functools import reduce
 
-from .config import IGNORE_FILES
-
 
 class TemplateBuilder:
-    def __init__(self, project, source, dest, placeholders):
+    def __init__(self, project, source, dest, placeholders, ignores):
         self.project = project
         self.source = source
         self.dest = dest
         self.placeholders = placeholders
-        self.ignores = [re.compile(ignore_file) for ignore_file in IGNORE_FILES]
+        self.ignores = [re.compile(ignore_file) for ignore_file in ignores]
 
     def is_ignored(self, path):
         return any(

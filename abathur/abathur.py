@@ -4,7 +4,7 @@ import os.path
 
 from .alias import AliasManager
 from .builder import TemplateBuilder
-from .config import ABATHUR_CONFIGURATION
+from .config import ABATHUR_CONFIGURATION, IGNORE_FILES
 
 def get_abathur_config(template_path):
     config = os.path.join(template_path, ABATHUR_CONFIGURATION)
@@ -42,5 +42,5 @@ def build(project_name, target, alias, custom_config):
     config = process_configuration(
         temp, read_custom_config(custom_config), project_name
     )
-    TemplateBuilder(project_name, temp, target, config).build()
+    TemplateBuilder(project_name, temp, target, config, IGNORE_FILES).build()
 
