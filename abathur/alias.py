@@ -1,5 +1,6 @@
 # coding: utf8
 
+import os
 import json
 import uuid
 
@@ -55,8 +56,9 @@ class AliasManager:
     def get_resource_type(self, resource):
         if os.path.exists(resource):
             return LOCAL_RESOURCE
-        elif resource.startswith(REMOTE_RESOURCE_HEADER):
-            return REMOTE_RESOURCE
+        else:
+            if any([resource.startswith(header) for header in REMOTE_RESOURCE_HEADER]):
+                return REMOTE_RESOURCE
         raise NotSupportException()
 
 
