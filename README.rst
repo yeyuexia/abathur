@@ -14,6 +14,8 @@ Requirements
 
 Install
 -------
+pip::
+  pip install abathur
 
 Usage
 -----
