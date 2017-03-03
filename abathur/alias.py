@@ -4,14 +4,14 @@ import json
 import uuid
 
 from git import Repo
+from monorequire import require
 
-from resources import (
-    require,
-    get_resource_type,
+from .config import (
+    ALIAS_CONFIGURATION,
     LOCAL_RESOURCE,
-    REMOTE_RESOURCE
+    REMOTE_RESOURCE,
+    REMOTE_RESOURCE_HEADER
 )
-from .config import ALIAS_CONFIGURATION
 
 
 class NotExistedAlias(Exception):
@@ -51,6 +51,13 @@ class AliasManager:
 
     def generate_alias(self, uri):
         return Alias(get_resource_type(uri), uri)
+
+    def get_resource_type(self, resource):
+        if os.path.exists(resource):
+            return LOCAL_RESOURCE
+        elif resource.startswith(REMOTE_RESOURCE_HEADER):
+            return REMOTE_RESOURCE
+        raise NotSupportException()
 
 
 class Alias:
