@@ -13,6 +13,7 @@ Abathur help you build project based on template.
 
 def get_parser():
     parser = ArgumentParser(description=DESCRIPTION)
-    AliasCommand().inject(parser)
-    BuildCommand().inject(parser)
+    subparser = parser.add_subparsers()
+    AliasCommand().inject(subparser)
+    BuildCommand().inject(subparser)
     return parser

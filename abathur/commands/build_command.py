@@ -11,7 +11,7 @@ class BuildCommand(Command):
     def add_custom_options(self, parser):
         parser.add_argument("--alias", "-a", metavar="alias", required=True)
         parser.add_argument(
-            "project_name", meavar="project_name", required=True
+            "project_name", metavar="project_name", nargs=1
         )
         parser.add_argument("--config", "-f", metavar="config")
         parser.add_argument("--output", "-o", metavar="output path")
