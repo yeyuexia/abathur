@@ -13,6 +13,6 @@ class AliasCommand(Command):
         parser.add_parser("alias", nargs=1, required=True, help="")
         parser.add_parser("uri", nargs=1, required=True, help="")
 
-    def handler(self, args):
+    def handle(self, args):
         manager = AliasManager()
         manager.add(args.alias, args.uri)

@@ -16,7 +16,7 @@ class BuildCommand(Command):
         parser.add_argument("--config", "-f", metavar="config")
         parser.add_argument("--output", "-o", metavar="output path")
 
-    def handler(self, args):
+    def handle(self, args):
         return build(
             args.project_name,
             args.output if args.output else args.project_name,
