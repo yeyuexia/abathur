@@ -12,7 +12,7 @@ def get_abathur_config(template_path):
     if not (os.path.exists(config) and os.path.isfile(config)):
         return list()
     with open(config, "r") as f:
-        return ["{" + name.strip() + "}" for name in f.readlines()]
+        return ["{" + name.strip() + "}" for name in f.readlines() if name.strip()]
 
 
 def process_configuration(template_path, custom_config, project_name):
