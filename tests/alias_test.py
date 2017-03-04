@@ -48,6 +48,6 @@ class AliasManagerTest(TestCase):
         self.assertEqual(self.manager.get_resource_type(url), LOCAL_RESOURCE)
 
     def test_success_alias_by_name(self):
-        self.assertEqual(self.manager.get("alias").dumps(), dict(
+        self.assertEqual(self.manager.get("alias").to_dict(), dict(
             uri="test", uri_type="__local_resource__"
         ))

@@ -45,7 +45,7 @@ class AliasManager:
 
     def _storage(self):
         caches = dict(
-            (alias, value.dumps()) for alias, value in self.aliases.items()
+            (alias, value.to_dict()) for alias, value in self.aliases.items()
         )
         with require(ALIAS_CONFIGURATION) as f:
             json.dump(caches, f)
@@ -67,7 +67,7 @@ class Alias:
         self.uri_type = uri_type
         self.uri = uri
 
-    def dumps(self):
+    def to_dict(self):
         return dict(uri_type=self.uri_type, uri=self.uri)
 
     def fetch(self):
