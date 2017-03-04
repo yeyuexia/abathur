@@ -47,10 +47,12 @@ class AliasManagerTest(TestCase):
     @patch("abathur.alias.os")
     def test_should_throw_not_support_exception(self, mock_os):
         mock_os.path.exists.return_value = False
-        url = "http://github.com:yeyuexia/abathur.git"
+        url = "www.baidu.com"
 
         try:
-            self.assertEqual(AliasManager.get_resource_type(url), LOCAL_RESOURCE)
+            self.assertEqual(
+                AliasManager.get_resource_type(url), LOCAL_RESOURCE
+            )
         except NotSupportException:
             pass
         else:
