@@ -46,3 +46,8 @@ class AliasManagerTest(TestCase):
         url = "git@github.com:yeyuexia/abathur.git"
 
         self.assertEqual(self.manager.get_resource_type(url), LOCAL_RESOURCE)
+
+    def test_success_alias_by_name(self):
+        self.assertEqual(self.manager.get("alias").dumps(), dict(
+            uri="test", uri_type="__local_resource__"
+        ))
