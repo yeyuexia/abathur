@@ -19,10 +19,16 @@ class NotExistedAlias(Exception):
     def __init__(self, alias):
         self.alias = alias
 
+    def __repr__(self):
+        return f"not found alias name: {self.alias}"
+
 
 class NotSupportException(Exception):
     def __init__(self, resource):
         self.resource = resource
+
+    def __repr__(self):
+        return f"not support the kind of resource: {self.resource}"
 
 
 class AliasManager:

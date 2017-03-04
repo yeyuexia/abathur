@@ -5,7 +5,7 @@ from unittest import TestCase
 
 from unittest.mock import patch, MagicMock
 
-from abathur.alias import AliasManager
+from abathur.alias import AliasManager, NotSupportException
 from abathur.constant import REMOTE_RESOURCE, LOCAL_RESOURCE
 
 
@@ -46,6 +46,18 @@ class AliasManagerTest(TestCase):
         url = "git@github.com:yeyuexia/abathur.git"
 
         self.assertEqual(self.manager.get_resource_type(url), LOCAL_RESOURCE)
+
+    @patch("abathur.alias.os")
+    def test_should_throw_not_support_exception(self, mock_os):
+        mock_os.path.exists.return_value = False
+        url = "http://github.com:yeyuexia/abathur.git"
+
+        try:
+            self.assertEqual(self.manager.get_resource_type(url), LOCAL_RESOURCE)
+        except NotSupportException:
+            pass
+        else:
+            self.fail()
 
     def test_success_alias_by_name(self):
         self.assertEqual(self.manager.get("alias").to_dict(), dict(
