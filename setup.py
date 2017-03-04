@@ -12,7 +12,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name="abathur",
-    version="0.1",
+    version="0.3",
     description="Template manager",
     long_description=long_description,
     url="https://github.com/yeyuexia/abathur",
@@ -31,4 +31,9 @@ setup(
     ],
     keywords='manage project templates and build project with template',
     packages=find_packages(),
+    entry_points={
+        'console_scripts': [
+            'abathur=abathur.entrypoint:main',
+        ],
+    },
 )
