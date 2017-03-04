@@ -39,9 +39,9 @@ class AliasManager:
         self._storage()
 
     def get(self, name):
-        if name not in self.alias:
+        if name not in self.aliases:
             raise NotExistedAlias(name)
-        return self.alias[name]
+        return self.aliases[name]
 
     def _storage(self):
         caches = dict(
@@ -67,8 +67,11 @@ class Alias:
         self.uri_type = uri_type
         self.uri = uri
 
+    def dumps(self):
+        return dict(uri_type=self.uri_type, uri=self.uri)
+
     def fetch(self):
-        if self.url_type == REMOTE_RESOURCE:
+        if self.uri_type == REMOTE_RESOURCE:
             res = Repo.clone_from(self.uri, f"/tmp/abathur-{uuid.uuid1().hex}")
             return res.working_dir
         else:
