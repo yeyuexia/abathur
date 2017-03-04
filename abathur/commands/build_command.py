@@ -6,7 +6,7 @@ from abathur.abathur import build
 
 class BuildCommand(Command):
     def __init__(self):
-        super().__init__("build", "help")
+        super().__init__("build", "build project based on template")
 
     def add_custom_options(self, parser):
         parser.add_argument("--alias", "-a", metavar="alias", required=True)
