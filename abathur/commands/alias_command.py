@@ -10,8 +10,8 @@ class AliasCommand(Command):
         super().__init__("alias", "alias help")
 
     def add_custom_options(self, parser):
-        parser.add_argument("alias", nargs=1, help="")
-        parser.add_argument("uri", nargs=1, help="")
+        parser.add_argument("alias",  help="")
+        parser.add_argument("uri", help="")
 
     def handle(self, args):
         manager = AliasManager()
