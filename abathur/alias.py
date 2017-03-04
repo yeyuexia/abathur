@@ -35,7 +35,7 @@ class AliasManager:
         )
 
     def add(self, name, uri):
-        self.alias[name] = self.generate_alias(uri)
+        self.aliases[name] = self.generate_alias(uri)
         self._storage()
 
     def get(self, name):
@@ -51,7 +51,7 @@ class AliasManager:
             json.dump(caches, f)
 
     def generate_alias(self, uri):
-        return Alias(get_resource_type(uri), uri)
+        return Alias(self.get_resource_type(uri), uri)
 
     def get_resource_type(self, resource):
         if os.path.exists(resource):
