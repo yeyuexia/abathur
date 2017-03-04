@@ -5,6 +5,7 @@ from unittest import TestCase
 
 from abathur.builder import TemplateBuilder
 
+
 class BuilderTest(TestCase):
     ignore_dir = "test_ignore_dir"
     ignore_hide_file = ".ignore"
