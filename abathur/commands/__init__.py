@@ -9,7 +9,7 @@ from .build_command import BuildCommand
 
 
 DESCRIPTION = """
-Abathur help you build project based on template.
+Abathur help you manage template and build project based on template.
 """
 
 
