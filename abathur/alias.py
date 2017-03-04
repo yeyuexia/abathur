@@ -20,6 +20,11 @@ class NotExistedAlias(Exception):
         self.alias = alias
 
 
+class NotSupportException(Exception):
+    def __init__(self, resource):
+        self.resource = resource
+
+
 class AliasManager:
     def __init__(self):
         self._load_configuration()
@@ -59,7 +64,7 @@ class AliasManager:
         else:
             if any([resource.startswith(header) for header in REMOTE_RESOURCE_HEADER]):
                 return REMOTE_RESOURCE
-        raise NotSupportException()
+        raise NotSupportException(resource)
 
 
 class Alias:
