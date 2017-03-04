@@ -9,12 +9,15 @@ Simple Template manager to manage template and create project based on template.
 
 Requirements
 ------------
+
 * Python 3.6+
 * Works on Linux, Windows, Mac OSX, BSD
 
 Install
 -------
+
 pip::
+
   pip install abathur
 
 Usage
