@@ -6,7 +6,7 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock
 
 from abathur.alias import AliasManager
-from abathur.config import REMOTE_RESOURCE, LOCAL_RESOURCE
+from abathur.constant import REMOTE_RESOURCE, LOCAL_RESOURCE
 
 
 class AliasManagerTest(TestCase):

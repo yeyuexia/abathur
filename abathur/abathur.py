@@ -4,7 +4,7 @@ import os.path
 
 from .alias import AliasManager
 from .builder import TemplateBuilder
-from .config import ABATHUR_CONFIGURATION, IGNORE_FILES
+from .constant import ABATHUR_CONFIGURATION, IGNORE_FILES
 
 
 def get_abathur_config(template_path):

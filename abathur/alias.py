@@ -7,7 +7,7 @@ import uuid
 from git import Repo
 from monorequire import require
 
-from .config import (
+from .constant import (
     ALIAS_CONFIGURATION,
     LOCAL_RESOURCE,
     REMOTE_RESOURCE,
