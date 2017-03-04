@@ -20,10 +20,7 @@ class AliasManagerTest(TestCase):
         mock_require.return_value.__enter__ = mock_fd
         self.manager = AliasManager()
 
-    @patch("abathur.alias.require")
-    def test_should_success_load_alias_without_configuration(
-            self, mock_require
-    ):
+    def test_should_success_load_alias_without_configuration(self):
         self.assertEqual(len(self.manager.aliases), 1)
 
     @patch("abathur.alias.os")
@@ -31,21 +28,21 @@ class AliasManagerTest(TestCase):
         mock_os.path.exists.return_value = False
         url = "https://github.com/yeyuexia/abathur.git"
 
-        self.assertEqual(self.manager.get_resource_type(url), REMOTE_RESOURCE)
+        self.assertEqual(AliasManager.get_resource_type(url), REMOTE_RESOURCE)
 
     @patch("abathur.alias.os")
     def test_should_success_judge_ssh_link_as_remote(self, mock_os):
         mock_os.path.exists.return_value = False
         url = "git@github.com:yeyuexia/abathur.git"
 
-        self.assertEqual(self.manager.get_resource_type(url), REMOTE_RESOURCE)
+        self.assertEqual(AliasManager.get_resource_type(url), REMOTE_RESOURCE)
 
     @patch("abathur.alias.os")
     def test_should_success_judge_local_uri_as_local(self, mock_os):
         mock_os.path.exists.return_value = True
         url = "git@github.com:yeyuexia/abathur.git"
 
-        self.assertEqual(self.manager.get_resource_type(url), LOCAL_RESOURCE)
+        self.assertEqual(AliasManager.get_resource_type(url), LOCAL_RESOURCE)
 
     @patch("abathur.alias.os")
     def test_should_throw_not_support_exception(self, mock_os):
@@ -53,7 +50,7 @@ class AliasManagerTest(TestCase):
         url = "http://github.com:yeyuexia/abathur.git"
 
         try:
-            self.assertEqual(self.manager.get_resource_type(url), LOCAL_RESOURCE)
+            self.assertEqual(AliasManager.get_resource_type(url), LOCAL_RESOURCE)
         except NotSupportException:
             pass
         else:

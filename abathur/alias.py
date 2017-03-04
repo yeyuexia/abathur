@@ -64,7 +64,8 @@ class AliasManager:
     def generate_alias(self, uri):
         return Alias(self.get_resource_type(uri), uri)
 
-    def get_resource_type(self, resource):
+    @staticmethod
+    def get_resource_type(resource):
         if os.path.exists(resource):
             return LOCAL_RESOURCE
         else:
