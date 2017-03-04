@@ -4,8 +4,15 @@ import os.path
 
 from .alias import AliasManager
 from .builder import TemplateBuilder
-from .constant import ABATHUR_CONFIGURATION, IGNORE_FILES
+from .constant import (
+    ABATHUR_CONFIGURATION,
+    ABATHUR_CONFIGURATION_ROOT,
+    IGNORE_FILES
+)
 
+def prepare_environment():
+    if not os.path.exists(ABATHUR_CONFIGURATION_ROOT):
+        os.mkdir(ABATHUR_CONFIGURATION_ROOT)
 
 def get_abathur_config(template_path):
     config = os.path.join(template_path, ABATHUR_CONFIGURATION)
