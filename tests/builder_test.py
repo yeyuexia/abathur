@@ -23,7 +23,9 @@ class BuilderTest(TestCase):
             self.builder.is_ignored(os.path.join(self.ignore_dir, "aaa"))
         )
         self.assertTrue(
-            self.builder.is_ignored(os.path.join(self.ignore_dir, "abc", "1aa"))
+            self.builder.is_ignored(
+                os.path.join(self.ignore_dir, "abc", "1aa")
+            )
         )
 
     def test_should_success_ignore_hide_file(self):
@@ -36,10 +38,11 @@ class BuilderTest(TestCase):
             self.builder.is_ignored(os.path.join("dir", self.ignore_hide_file))
         )
 
-
     def test_should_success_ignore_hile_directory(self):
         self.assertTrue(
-            self.builder.is_ignored(os.path.join(self.ignore_hide_file, "adbasd"))
+            self.builder.is_ignored(
+                os.path.join(self.ignore_hide_file, "adbasd")
+            )
         )
 
     def test_should_replace_all_placeholder(self):
