@@ -10,7 +10,7 @@ class BuilderTest(TestCase):
     ignore_dir = "test_ignore_dir"
     ignore_hide_file = ".ignore"
 
-    ignores = [ignore_dir, ignore_hide_file]
+    ignores = [ignore_dir, r"(.*/)?\.ignore.*"]
 
     def setUp(self):
         placeholders = dict(placeholder1="aaaaaa", p2="bbbb", p3="ccccccc")
@@ -30,6 +30,12 @@ class BuilderTest(TestCase):
         self.assertTrue(
             self.builder.is_ignored(self.ignore_hide_file)
         )
+
+    def test_should_success_ignore_hide_file_in_directory(self):
+        self.assertTrue(
+            self.builder.is_ignored(os.path.join("dir", self.ignore_hide_file))
+        )
+
 
     def test_should_success_ignore_hile_directory(self):
         self.assertTrue(
