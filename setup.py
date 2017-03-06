@@ -12,7 +12,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name="abathur",
-    version="0.3",
+    version="0.4",
     description="Template manager",
     long_description=long_description,
     url="https://github.com/yeyuexia/abathur",
@@ -36,4 +36,5 @@ setup(
             'abathur=abathur.entrypoint:main',
         ],
     },
+    install_requires=['mono-require', 'gitdb2', 'GitPython', 'smmap2'],
 )
