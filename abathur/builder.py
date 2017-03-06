@@ -3,9 +3,9 @@
 import os
 import re
 import shutil
+import functools
 
-from os import path, mkdir
-from functools import reduce
+from os import path
 
 
 class TemplateBuilder:
@@ -32,7 +32,7 @@ class TemplateBuilder:
                 print(f"copy file {source} error, {e}")
 
     def replace(self, src):
-        return reduce(
+        return functools.reduce(
             lambda x, y: x.replace(y[0], y[1]),
             self.placeholders.items(),
             src
@@ -41,7 +41,7 @@ class TemplateBuilder:
     def make_dir(self, dest, folder_name):
         if not self.is_ignored(folder_name):
             print(f"create dir {self.replace(path.join(dest, folder_name))}")
-            mkdir(self.replace(path.join(dest, folder_name)))
+            os.mkdir(self.replace(path.join(dest, folder_name)))
 
     def get_relative_path(self, src):
         return src.replace(self.source, "").lstrip("/")
@@ -50,7 +50,7 @@ class TemplateBuilder:
         return path.join(self.dest, src)
 
     def build(self):
-        mkdir(self.dest)
+        os.mkdir(self.dest)
         for root, dirs, files in os.walk(self.source):
             dest = self.get_dest(self.get_relative_path(root))
             [self.copy_file(
