@@ -24,7 +24,7 @@ class TemplateBuilder:
     def copy_file(self, source, dest):
         if not self.is_ignored(source):
             print(f"copy: from {source} to {dest}")
-            shutil.copyfile(source, dest)
+            shutil.copy2(source, dest)
             try:
                 with open(source, "r") as f:
                     open(dest, "w").write(self.replace(f.read()))
