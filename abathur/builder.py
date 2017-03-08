@@ -5,7 +5,6 @@ import re
 import shutil
 import functools
 
-from os import path
 
 
 class TemplateBuilder:
@@ -38,23 +37,25 @@ class TemplateBuilder:
             src
         )
 
-    def make_dir(self, dest, folder_name):
-        if not self.is_ignored(folder_name):
-            print(f"create dir {self.replace(path.join(dest, folder_name))}")
-            os.mkdir(self.replace(path.join(dest, folder_name)))
+    def make_dir(self, path, folder_name):
+        dest = os.path.join(path, folder_name)
+        if not self.is_ignored(dest):
+            print(f"create dir {self.replace(dest)}")
+            os.mkdir(self.replace(dest))
 
     def get_relative_path(self, src):
         return src.replace(self.source, "").lstrip("/")
 
     def get_dest(self, src):
-        return path.join(self.dest, src)
+        return os.path.join(self.dest, src)
 
     def build(self):
-        os.mkdir(self.dest)
+        if not os.path.exists(self.dest):
+            os.mkdir(self.dest)
         for root, dirs, files in os.walk(self.source):
             dest = self.get_dest(self.get_relative_path(root))
             [self.copy_file(
-                path.join(root, file_name),
-                self.replace(path.join(dest, file_name))
+                os.path.join(root, file_name),
+                self.replace(os.path.join(dest, file_name))
             ) for file_name in files]
             [self.make_dir(dest, folder) for folder in dirs]
