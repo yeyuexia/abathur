@@ -55,6 +55,9 @@ class AliasManager:
             raise NotExistedAlias(name)
         return self.aliases[name]
 
+    def get_all(self):
+        return dict([(name, alias.uri) for name, alias in self.aliases.items()])
+
     def _storage(self):
         caches = dict(
             (alias, value.to_dict()) for alias, value in self.aliases.items()
