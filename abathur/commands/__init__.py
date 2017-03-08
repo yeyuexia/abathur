@@ -4,7 +4,7 @@ import sys
 
 from argparse import ArgumentParser
 
-from .alias_command import AliasCommand
+from .add_command import AddCommand
 from .build_command import BuildCommand
 
 
@@ -16,7 +16,7 @@ Abathur help you manage template and build project based on template.
 def get_parser():
     parser = AbathurParser(prog="abathur", description=DESCRIPTION)
     subparser = parser.add_subparsers()
-    AliasCommand().inject(subparser)
+    AddCommand().inject(subparser)
     BuildCommand().inject(subparser)
     return parser
 
