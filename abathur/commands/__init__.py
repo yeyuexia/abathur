@@ -7,6 +7,7 @@ from argparse import ArgumentParser
 from .add_command import AddCommand
 from .build_command import BuildCommand
 from .list_command import ListCommand
+from .remove_command import RemoveCommand
 
 
 DESCRIPTION = """
@@ -21,7 +22,7 @@ def get_parser():
 
 
 class AbathurParser(ArgumentParser):
-    sub_commands = [AddCommand, BuildCommand, ListCommand]
+    sub_commands = [AddCommand, BuildCommand, ListCommand, RemoveCommand]
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

@@ -50,6 +50,12 @@ class AliasManager:
         self.aliases[name] = self.generate_alias(uri)
         self._storage()
 
+    def remove(self, name):
+        if name not in self.aliases:
+            raise NotExistedAlias(name)
+        del self.aliases[name]
+        self._storage()
+
     def get(self, name):
         if name not in self.aliases:
             raise NotExistedAlias(name)
