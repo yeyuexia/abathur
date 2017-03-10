@@ -37,10 +37,12 @@ class AbathurTest(TestCase):
             get_abathur_config("aaa"), ["{abc}", "{bbb}", "{cba}"]
         )
 
+    @patch("abathur.abathur.input")
     @patch("abathur.abathur.get_abathur_config")
     def test_success_load_replace_words_based_on_file(
-            self, config_mock):
+            self, config_mock, input_mock):
         config_mock.return_value = ["{key}", "{words}", "{abathur}"]
+        input_mock.return_value = "\n"
 
         result = process_configuration("config", {
             "{key}": "111", "{words}": "222", "{abathur}": "333", "{acc}": "44"
@@ -54,6 +56,17 @@ class AbathurTest(TestCase):
                 "{PROJECT_NAME}": "test"
             }
         )
+
+    @patch("abathur.abathur.input")
+    @patch("abathur.abathur.get_abathur_config")
+    def test_success_load_replace_words_for_project_name(
+            self, config_mock, input_mock):
+        config_mock.return_value = []
+        input_mock.return_value = "custom\n"
+
+        result = process_configuration("config", {}, "test")
+
+        self.assertEqual(result, {"{PROJECT_NAME}": "custom"})
 
     @patch("abathur.abathur.input")
     @patch("abathur.abathur.get_abathur_config")
@@ -73,7 +86,7 @@ class AbathurTest(TestCase):
                 "{words}": "222",
                 "{abathur}": "333",
                 "{input}": "555",
-                "{PROJECT_NAME}": "test"
+                "{PROJECT_NAME}": "555"
             }
         )
 
