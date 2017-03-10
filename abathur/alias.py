@@ -68,7 +68,7 @@ class AliasManager:
         caches = dict(
             (alias, value.to_dict()) for alias, value in self.aliases.items()
         )
-        with require(ALIAS_CONFIGURATION) as f:
+        with require(ALIAS_CONFIGURATION, "w+") as f:
             json.dump(caches, f)
 
     def generate_alias(self, uri):
