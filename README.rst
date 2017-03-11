@@ -59,7 +59,7 @@ Presume you have a template like this::
       └── resources
 
 
-and put all placeholders surrounding with {} like {PROJECT_NAME} and {PROJECT_NAME_IN_CLASS} in the file sources and directory, you can write a file named `.abathur` in the root path like::
+You can put all placeholders surrounding with {} like {PROJECT_NAME} and {PROJECT_NAME_IN_CLASS} in the file sources and directory, you can write a file named `.abathur` in the root path like::
   cat .abathur
   PROJECT_NAME_IN_CLASS
   TABLE_NAME
