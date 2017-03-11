@@ -12,7 +12,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name="abathur",
-    version="0.4",
+    version="1.0.0",
     description="Template manager",
     long_description=long_description,
     url="https://github.com/yeyuexia/abathur",
