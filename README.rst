@@ -24,6 +24,7 @@ Usage
 -----
 
 Presume you have a template like this::
+
   template/src
   ├── main
   │   ├── java
@@ -60,6 +61,7 @@ Presume you have a template like this::
 
 
 You can put all placeholders surrounding with {} like {PROJECT_NAME} and {PROJECT_NAME_IN_CLASS} in the file sources and directory, you can write a file named `.abathur` in the root path like::
+
   cat .abathur
   PROJECT_NAME_IN_CLASS
   TABLE_NAME
@@ -82,7 +84,9 @@ When build project, abathur will let user fix replace the words notified in `.ab
 * You can use --config special a config file auto fill replaceholders
 
 List aliases::
+
   abathur list
 
 Remove alias::
+
   abathur remove alias
