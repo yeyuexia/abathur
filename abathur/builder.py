@@ -4,6 +4,7 @@ import os
 import re
 import shutil
 import functools
+import subprocess
 
 
 
@@ -23,12 +24,27 @@ class TemplateBuilder:
     def copy_file(self, source, dest):
         if not self.is_ignored(source):
             print(f"copy: from {source} to {dest}")
-            shutil.copy2(source, dest)
+            self._copy(source, dest)
             try:
                 with open(source, "r") as f:
                     open(dest, "w").write(self.replace(f.read()))
             except Exception as e:
                 print(f"copy file {source} error, {e}")
+
+    def _copy(self, source, dest):
+        def system_copy(command):
+            p = subprocess.Popen(f"{command} {source} {dest}", stdout=subprocess.PIPE, shell=True)
+            output, err = p.communicate()
+            if err:
+                print(err)
+
+        if os.name in ("posix", "mac"):
+            system_copy("cp")
+        elif os.name == "nt":
+            system_copy("copy")
+        else:
+            shutil.copy2(source, dest)
+
 
     def replace(self, src):
         return functools.reduce(
