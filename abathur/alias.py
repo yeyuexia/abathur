@@ -87,7 +87,10 @@ class AliasManager:
 class Alias:
     def __init__(self, uri_type, uri):
         self.uri_type = uri_type
-        self.uri = uri
+        if uri_type == REMOTE_RESOURCE:
+            self.uri = uri
+        else:
+            self.uri = os.path.abspath(uri)
 
     def to_dict(self):
         return dict(uri_type=self.uri_type, uri=self.uri)
