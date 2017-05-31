@@ -25,7 +25,7 @@ def get_abathur_config(template_path):
 def process_configuration(template_path, custom_config, project_name):
     placeholders = get_abathur_config(template_path)
     config = dict()
-    project_name_value = input(f"please input value of placeholder `{'PROJECT_NAME'}`(default {project_name}:").strip()
+    project_name_value = input(f"please input value of placeholder `PROJECT_NAME` (default {project_name}):").strip()
     config["{PROJECT_NAME}"] = project_name_value if project_name_value else project_name
     for placeholder in placeholders:
         if placeholder in custom_config:
