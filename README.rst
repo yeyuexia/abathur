@@ -2,8 +2,8 @@
 Abathur
 =======
 
-.. image:: https://travis-ci.org/yeyuexia/dummie.svg?branch=master
-   :target: https://travis-ci.org/yeyuexia/dummie
+.. image:: https://travis-ci.org/yeyuexia/abathur.svg?branch=master
+   :target: https://travis-ci.org/yeyuexia/abathur
 
 Simple Template manager to manage template and create project based on template.
 
