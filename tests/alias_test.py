@@ -58,7 +58,9 @@ class AliasManagerTest(TestCase):
         else:
             self.fail()
 
-    def test_success_alias_by_name(self):
+	@patch("abathur.alias.os")
+    def test_success_alias_by_name(self, mock_os):
+		mock_os.path.abspath.return_value = "test"
         self.assertEqual(self.manager.get("alias").to_dict(), dict(
             uri="test", uri_type="__local_resource__"
         ))
