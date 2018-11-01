@@ -58,7 +58,7 @@ class AliasManagerTest(TestCase):
         else:
             self.fail()
 
-	@patch("abathur.alias.os")
+    @patch("abathur.alias.os")
     def test_success_alias_by_name(self, mock_os):
 		mock_os.path.abspath.return_value = "test"
         self.assertEqual(self.manager.get("alias").to_dict(), dict(
