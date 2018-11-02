@@ -12,12 +12,16 @@ from abathur.constant import REMOTE_RESOURCE, LOCAL_RESOURCE
 class AliasManagerTest(TestCase):
 
     @patch("abathur.alias.require")
-    def setUp(self, mock_require):
+    @patch("abathur.alias.os")
+    def setUp(self, mock_os, mock_require):
         mock_fd = MagicMock()
         mock_fd.return_value.read.return_value = json.dumps(dict(
             alias=dict(uri_type="__local_resource__", uri="test")
         ))
         mock_require.return_value.__enter__ = mock_fd
+
+        mock_os.path.abspath.return_value = "test"
+
         self.manager = AliasManager()
 
     def test_should_success_load_alias_without_configuration(self):
@@ -50,17 +54,13 @@ class AliasManagerTest(TestCase):
         url = "www.baidu.com"
 
         try:
-            self.assertEqual(
-                AliasManager.get_resource_type(url), LOCAL_RESOURCE
-            )
+            self.manager.get_resource_type(url)
         except NotSupportException:
             pass
         else:
             self.fail()
 
-    @patch("abathur.alias.os")
-    def test_success_alias_by_name(self, mock_os):
-        mock_os.path.abspath.return_value = "test"
+    def test_success_alias_by_name(self):
         self.assertEqual(self.manager.get("alias").to_dict(), dict(
             uri="test", uri_type="__local_resource__"
         ))
